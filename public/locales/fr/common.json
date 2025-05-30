@@ -1,0 +1,21 @@
+{"hero":{
+    "title":"Prenez soin de vous",
+    "input":{
+        "treatment":"Traitement",
+        "date":"Date de traitement"
+    },
+    "button":{
+        "start":"Commencer"
+    }
+},
+ "nav": {
+    "dashboard": "Tableau de bord",
+    "appointments": "Rendez-vous",
+    "notes": "Notes",
+    "logout": "Déconnexion",
+    "login": "Se connecter"
+  },
+  "buttons": {
+    "save": "Enregistrer",
+    "cancel": "Annuler"
+  }}

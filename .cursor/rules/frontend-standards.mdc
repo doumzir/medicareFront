@@ -1,0 +1,31 @@
+---
+description: Standards frontend Medicar (React, Remix, TypeScript, i18n, shadcn/ui, Lucide, Tailwind, Zod)
+globs: ["app/**/*"]
+alwaysApply: true
+---
+
+# Règles de développement frontend
+
+- Utilise **TypeScript** partout (aucun fichier `.js` dans `app/`).
+- Les composants React sont des fonctions (React.FC).
+- Utilise les hooks React Router v7 (`useNavigate`, `useParams`, etc.), jamais les HOC.
+- Toutes les chaînes affichées passent par `useTranslation` (i18n).
+- Les composants UI doivent utiliser **shadcn/ui**.
+- Les icônes proviennent exclusivement de **Lucide**.
+- Le style se fait avec **TailwindCSS** (pas de CSS inline sauf cas dynamique).
+- Toute validation de formulaire doit passer par un schéma **Zod**.
+- Les erreurs de validation sont affichées à l’utilisateur.
+- Les fichiers de traduction sont dans `public/locales/`.
+- Les hooks personnalisés sont dans `app/hooks/`.
+- Les utilitaires dans `app/lib/`.
+- Les composants UI dans `app/components/ui/`.
+- Les contextes dans `app/components/`.
+- Les commits respectent la convention `feat:`, `fix:`, etc.
+- Documente tout hook ou composant complexe (en français).
+- Respecte l’accessibilité (labels, navigation clavier, contraste).
+
+# Exemples
+
+- Pour un formulaire, crée un schéma Zod dans `app/lib/` et utilise-le dans le composant.
+- Pour une chaîne affichée, utilise `{t("clé")}` avec le hook `useTranslation`.
+- Pour un bouton, utilise `<Button />` de shadcn/ui et une icône Lucide si besoin.

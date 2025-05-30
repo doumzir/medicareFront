@@ -5,10 +5,41 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData
 } from "react-router";
 
+import React from "react";
+import { I18nextProvider } from "react-i18next";
+import type { LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Navbar } from "./components/Navbar";
+import type { User } from "./components/UserContext";
+import { UserProvider } from "./components/UserContext";
+import i18n from "./lib/i18n";
+
+/**
+ * Loader Remix/React Router pour charger l'utilisateur depuis le backend
+ * Récupère le token dans les cookies, appelle le backend, et renvoie l'utilisateur (ou null)
+ */
+export async function loader({ request }: LoaderFunctionArgs) {
+  const cookie = request.headers.get("cookie") || "";
+  const match = cookie.match(/auth_token=([^;]+)/);
+  let user: User | null = null;
+  if (match) {
+    try {
+      const res = await fetch("https://backendurl/auth/me", {
+        headers: { "Authorization": `Bearer ${match[1]}` },
+      });
+      if (res.ok) {
+        user = (await res.json()) as User;
+      }
+    } catch {
+      user = null;
+    }
+  }
+  return { user };
+}
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,6 +54,7 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// Layout simplifié pour React Router v7 (pas de Meta, Links, Scripts, ScrollRestoration)
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -41,8 +73,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Point d'entrée principal de l'app
+ * Fournit le UserProvider avec l'utilisateur du loader
+ */
 export default function App() {
-  return <Outlet />;
+  const { user } = useLoaderData() as { user: User | null };
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      <UserProvider initialUser={user}>
+        <Navbar />
+        <Outlet />
+      </UserProvider>
+    </I18nextProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

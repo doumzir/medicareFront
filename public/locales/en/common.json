@@ -1,0 +1,22 @@
+{"hero":{
+    "title":"Take care of yourself",
+    "input":{
+        "treatment":"Treatment",
+        "date":"Treatment date"
+    },
+    "button":{
+        "start":"Start"
+    }
+},
+ "nav": {
+    "dashboard": "Dashboard",
+    "appointments": "Appointments",
+    "notes": "Notes",
+    "logout": "Logout",
+    "login": "Login"
+    
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel"
+  }}
