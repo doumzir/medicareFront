@@ -1,13 +1,23 @@
-import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { HeroHeader } from '~/components/HeroHeader';
+import { Welcome } from '../welcome/welcome';
+import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: 'Medicare' },
+    {
+      name: 'description',
+      content:
+        'Medicare est une application de gestion de votre santé dans le temps',
+    },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <>
+      <HeroHeader title='Prenez soin de vous' />
+      <Welcome />
+    </>
+  );
 }
