@@ -22,3 +22,4 @@ export const getAuthenticatedUser = async ({ request }: { request: Request }) =>
         throw await destroyUserToken({request})
     }
 }
+

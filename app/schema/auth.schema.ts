@@ -43,8 +43,7 @@ export const loginSchema = z.object({
   password: passwordSchema,
 });
 export const getAuthenticatedUserSchema = z.object({
-
-  email: z.email({ message: 'Email invalide' }),
+ email: z.email({ message: 'Email invalide' }),
   id: z.string(),
   firstName: z.string(),
 });

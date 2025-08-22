@@ -1,5 +1,5 @@
 
-import { Form, redirect, useSearchParams } from 'react-router';
+import { Form, Link, redirect, useSearchParams } from 'react-router';
 import { Section } from '~/components/ui/Section';
 import { Title } from '~/components/ui/Title';
 import { Button } from '~/components/ui/button';
@@ -8,9 +8,9 @@ import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { registerSchema, tokenSchema } from '~/schema/auth.schema';
 
-import type { Route } from './+types/register';
-import { commitUserToken } from '~/session.server';
 import { getAuthenticatedUser } from '~/auth.server';
+import { commitUserToken } from '~/session.server';
+import type { Route } from './+types/register';
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const user = await getAuthenticatedUser({ request });
   if(user) {
@@ -97,8 +97,20 @@ export default function Register() {
             </p>
           </div>
         </div>
-        <Button type='submit'>M’inscrire</Button>
+        <Button type='submit'>M&apos;inscrire</Button>
       </Form>
+      
+      <div className="mt-6 text-center text-sm text-gray-600">
+        <p>
+          Vous avez déjà un compte ?{' '}
+          <Link 
+            to="/login" 
+            className="text-primary hover:underline font-medium"
+          >
+            Se connecter
+          </Link>
+        </p>
+      </div>
     </Section>
   );
 }
