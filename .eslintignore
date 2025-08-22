@@ -33,3 +33,4 @@ Thumbs.db
 # Config files that don't need linting
 vite.config.ts
 react-router.config.ts
+
